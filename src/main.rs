@@ -1,3 +1,5 @@
+use largo_rs::command::build_parser;
+
 fn main() {
-    println!("Hello, world!");
+    let _ = build_parser(&[]).get_matches();
 }
