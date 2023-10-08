@@ -1,17 +1,15 @@
-use clap::{command, value_parser};
+use clap::command;
 
 pub fn build_parser(subcommands: &[String]) -> clap::Command {
     let command = command!();
-
-    let file_name_arg = clap::Arg::new("file-name")
-        .value_parser(value_parser!(String));
 
     let subcommands: Vec<clap::Command> = subcommands
         .into_iter()
         .map(|s| {
             let s = s.clone();
             clap::Command::new(s)
-                .arg(file_name_arg.clone())
+                .arg(clap::Arg::new("file-name"))
+                .arg(clap::Arg::new("dry-run").long("dry-run").action(clap::ArgAction::SetTrue))
         })
         .collect();
 

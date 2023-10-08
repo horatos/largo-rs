@@ -1,0 +1,11 @@
+[project]
+largo = "largo-rs"
+
+[ledger]
+bin = "/opt/local/bin/ledger"
+default-options = ["--no-pager", "--force-color"]
+
+[commands]
+bs = ["balance", "-V", "^資産", "^負債", "^純資産"]
+pl = ["balance", "^収益", "^費用"]
+
