@@ -18,9 +18,7 @@ impl App {
     pub fn run(&self) -> Result<()> {
         let subcommands = self
             .manifesto
-            .largo_subcommands()
-            .into_iter()
-            .map(|s| s.clone())
+            .largo_subcommands().cloned()
             .collect::<Vec<_>>();
         let mut command = command::build_parser(&subcommands);
         let matches = command.clone().get_matches();

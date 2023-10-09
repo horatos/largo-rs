@@ -4,7 +4,7 @@ pub fn build_parser(subcommands: &[String]) -> clap::Command {
     let command = command!();
 
     let subcommands: Vec<clap::Command> = subcommands
-        .into_iter()
+        .iter()
         .map(|s| {
             let s = s.clone();
             clap::Command::new(s).arg(clap::Arg::new("file-name")).arg(
@@ -40,7 +40,7 @@ mod test {
         let args = vec!["largo", "bs"];
 
         let matches = build_parser(&subcommands())
-            .try_get_matches_from(&args)
+            .try_get_matches_from(args)
             .unwrap();
 
         assert!(matches!(matches.subcommand(), Some(("bs", _))));
@@ -51,7 +51,7 @@ mod test {
         let args = vec!["largo", "pl"];
 
         let matches = build_parser(&subcommands())
-            .try_get_matches_from(&args)
+            .try_get_matches_from(args)
             .unwrap();
 
         assert!(matches!(matches.subcommand(), Some(("pl", _))));
@@ -61,7 +61,7 @@ mod test {
     fn parse_undefined_subcommand() {
         let args = vec!["largo", "foo"];
 
-        let matches = build_parser(&subcommands()).try_get_matches_from(&args);
+        let matches = build_parser(&subcommands()).try_get_matches_from(args);
 
         assert!(matches.is_err());
     }
@@ -71,7 +71,7 @@ mod test {
         let args = vec!["largo", "bs", "2022"];
 
         let matches = build_parser(&subcommands())
-            .try_get_matches_from(&args)
+            .try_get_matches_from(args)
             .unwrap();
 
         assert!(matches!(matches.subcommand(), Some(("bs", _))));
