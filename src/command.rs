@@ -7,9 +7,11 @@ pub fn build_parser(subcommands: &[String]) -> clap::Command {
         .into_iter()
         .map(|s| {
             let s = s.clone();
-            clap::Command::new(s)
-                .arg(clap::Arg::new("file-name"))
-                .arg(clap::Arg::new("dry-run").long("dry-run").action(clap::ArgAction::SetTrue))
+            clap::Command::new(s).arg(clap::Arg::new("file-name")).arg(
+                clap::Arg::new("dry-run")
+                    .long("dry-run")
+                    .action(clap::ArgAction::SetTrue),
+            )
         })
         .collect();
 

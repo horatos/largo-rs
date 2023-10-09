@@ -45,7 +45,7 @@ impl Manifesto {
         self.project.largo.as_str()
     }
 
-    pub fn largo_subcommands(&self) -> impl Iterator<Item=&String> {
+    pub fn largo_subcommands(&self) -> impl Iterator<Item = &String> {
         self.commands.names()
     }
 
@@ -67,7 +67,7 @@ impl Commands {
         self.commands.get(name)
     }
 
-    pub fn names(&self) -> impl Iterator<Item=&String> {
+    pub fn names(&self) -> impl Iterator<Item = &String> {
         self.commands.keys()
     }
 }
