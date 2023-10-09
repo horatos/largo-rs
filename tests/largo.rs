@@ -39,3 +39,14 @@ fn largo_bs_2022_with_dry_run_should_print_ledger_command() {
         "-f book/2022.ledger balance -V ^資産 ^負債 ^純資産 --no-pager --force-color"
     );
 }
+
+#[test]
+fn largo_bs_should_succeed() {
+    let largo = std::fs::canonicalize("target/debug/largo-rs").unwrap();
+    let output = Command::new(largo.as_path())
+        .arg("bs")
+        .current_dir("tests/examples/default")
+        .output()
+        .unwrap();
+    assert!(output.status.success(), "largo-rs failed: {:?}", output);
+}
