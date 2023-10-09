@@ -54,7 +54,7 @@ impl App {
             let mut child = std::process::Command::new(self.manifesto.ledger_bin())
                 .args(args)
                 .spawn()
-                .wrap_err("Failed to spawn ledger-cli")?;
+                .wrap_err_with(|| format!("Failed to spawn ledger-cli: {}", self.manifesto.ledger_bin()))?;
             child.wait().wrap_err("Failed to wait child process")?;
         }
 

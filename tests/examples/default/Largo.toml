@@ -2,7 +2,7 @@
 largo = "largo-rs"
 
 [ledger]
-bin = "/usr/local/bin/ledger"
+bin = "ledger"
 default-options = ["--no-pager", "--force-color"]
 
 [commands]
