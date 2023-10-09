@@ -1,4 +1,4 @@
-use eyre::Result;
+use eyre::{Result, WrapErr};
 
 use crate::command;
 use crate::ledger_file::LedgerFile;
@@ -34,7 +34,7 @@ impl App {
     }
 
     fn process_subcommand(&self, name: &str, matches: &clap::ArgMatches) -> Result<()> {
-        let mut args = vec![self.manifesto.ledger_bin().to_owned()];
+        let mut args = vec![];
 
         args.push("-f".to_owned());
         let ledger_file = match matches.get_one::<String>("file-name") {
@@ -53,7 +53,11 @@ impl App {
             let args = args.as_slice().join(" ");
             println!("{args}");
         } else {
-            unimplemented!();
+            let mut child = std::process::Command::new(self.manifesto.ledger_bin())
+                .args(args)
+                .spawn()
+                .wrap_err("Failed to spawn ledger-cli")?;
+            child.wait().wrap_err("Failed to wait child process")?;
         }
 
         Ok(())
