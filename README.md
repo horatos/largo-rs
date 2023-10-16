@@ -30,9 +30,11 @@ The following Usage section explains the features in detail.
 The directory structure below is supposed.
 
 ```text
-Largo.toml
-book/2022.ledger
-book/2023.ledger
+.
+├── book
+│  ├── 2022.ledger
+│  └── 2023.ledger
+└── Largo.toml
 ```
 
 The file _Largo.toml_ is a project manifesto file.
