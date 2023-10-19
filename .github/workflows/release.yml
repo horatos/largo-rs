@@ -40,9 +40,9 @@ jobs:
         echo "host_triple=$(rustc -vV | grep host | cut -d' ' -f2)" >> "$GITHUB_ENV"
     - name: Compress the binary
       run: |
-        tar -czf largo-rs-${RELEASE_VERSION}-${host_name}.tar.gz target/release/largo-rs
+        tar -czfv largo-rs-${RELEASE_VERSION}-${host_triple}.tar.gz target/release/largo-rs
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          largo-rs-${{ env.RELEASE_VERSION }}-${{ env.host_name }}.tar.gz
+          largo-rs-${{ env.RELEASE_VERSION }}-${{ env.host_triple }}.tar.gz
