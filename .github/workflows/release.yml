@@ -14,6 +14,9 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Set version variable
+      run: |
+        echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - uses: awalsh128/cache-apt-pkgs-action@latest
       with:
         packages: ledger
@@ -35,8 +38,11 @@ jobs:
     - name: Set host triple
       run: |
         echo "host_triple=$(rustc -vV | grep host | cut -d' ' -f2)" >> "$GITHUB_ENV"
+    - name: Compress the binary
+      run: |
+        tar -czf largo-rs-${RELEASE_VERSION}-${host_name}.tar.gz target/release/largo-rs
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          target/release/${{ env.host_triple }}/largo-rs
+          largo-rs-${RELEASE_VERSION}-${host_name}.tar.gz
