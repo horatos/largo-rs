@@ -84,3 +84,11 @@ The command above is equivalent to the following:
 ```shell
 $ ledger -f book/2022.ledger -V ^資産 ^負債 ^純資産
 ```
+
+## Install
+
+### Linux
+
+1. Download the largo-rs binary from [Releases](https://github.com/horatos/largo-rs/releases) page.
+2. Uncompress the archive file with `tar` command.
+3. Move the binary to your favorite path.
